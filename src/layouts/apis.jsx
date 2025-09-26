@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
-import { style } from "@mui/system";
+import Shuffle from "../UI-components/text";
 
 export default function GetData() {
   const [inp, setInp] = useState("");
@@ -18,7 +18,9 @@ export default function GetData() {
     setLoad(true);
     setError(null); // reset previous error
     try {
-      const res = await fetch(`https://rickandmortyapi.com/api/character/${inp}`);
+      const res = await fetch(
+        `https://rickandmortyapi.com/api/character/${inp}`
+      );
       if (!res.ok) throw new Error("Character not found"); // handle 404
       const items = await res.json();
       setData(items);
@@ -37,7 +39,7 @@ export default function GetData() {
   };
 
   return (
-    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+    <div style={{ width: "100%", height: "120vh", position: "relative" }}>
       <Beams
         beamWidth={3}
         beamHeight={30}
@@ -65,6 +67,24 @@ export default function GetData() {
           width: "90%",
         }}
       >
+ <Shuffle
+  text="Rick & Morty Explorer"
+  shuffleDirection="right"
+  duration={0.35}
+  animationMode="evenodd"
+  shuffleTimes={1}
+  ease="power3.out"
+  stagger={0.03}
+  threshold={0.1}
+  triggerOnce={true}
+  triggerOnHover={true}
+  respectReducedMotion={true}
+  style={{
+    fontSize: "36px",          // correct camelCase
+    fontFamily: "'Press Start 2P', cursive",
+    margin:"10px"
+  }}
+/>
         <Stack direction="row" spacing={1} alignItems="center">
           <TextField
             onChange={(e) => setInp(e.target.value)}
@@ -75,13 +95,18 @@ export default function GetData() {
             variant="outlined"
             fullWidth
             InputProps={{
-                style:{color:"white"}
+              style: { color: "white" },
             }}
             InputLabelProps={{
-                style:{color:"white"}
+              style: { color: "white" },
             }}
           />
-          <IconButton aria-label="fingerprint" onClick={fetchData} size="large" color="success">
+          <IconButton
+            aria-label="fingerprint"
+            onClick={fetchData}
+            size="large"
+            color="success"
+          >
             <Fingerprint />
           </IconButton>
         </Stack>
@@ -108,7 +133,11 @@ export default function GetData() {
               <img
                 src={data.image}
                 alt={data.name}
-                style={{ borderRadius: "10px", marginTop: "10px", width: "100%" }}
+                style={{
+                  borderRadius: "10px",
+                  marginTop: "10px",
+                  width: "100%",
+                }}
               />
             </>
           ) : (
