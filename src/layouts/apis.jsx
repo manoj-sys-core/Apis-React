@@ -113,7 +113,9 @@ export default function GetData() {
 
         <div style={{ marginTop: "20px" }}>
           {load ? (
-            <CircularProgress color="success" />
+            <CircularProgress color="success" sx={{
+              ml: "40%",
+            }} />
           ) : error ? (
             <p style={{ color: "red" }}>{error}</p>
           ) : data ? (
@@ -127,7 +129,10 @@ export default function GetData() {
               <h3>Episodes:</h3>
               <ul>
                 {data.episode.map((ep, i) => (
-                  <li key={i}>{ep}</li>
+                  <li key={i}><a href={ep} style={{
+                    textDecoration: "none",
+                    color: "lightblue"
+                  }}><span style={{color:"white"}}>Episode {i+1}:</span> {ep} </a></li>
                 ))}
               </ul>
               <img
